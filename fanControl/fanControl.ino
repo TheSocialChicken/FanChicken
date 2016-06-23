@@ -29,15 +29,6 @@ void loop()
 	analogWrite(3,20);
 	delay(5000);
 	readPulse();
-	analogWrite(3,50);
-	delay(5000);
-	readPulse();
-	analogWrite(3,100);
-	delay(5000);
-	readPulse();
-	analogWrite(3,200);
-	delay(5000);
-	readPulse();
 	analogWrite(3,255);
 	delay(5000);
 	readPulse();
