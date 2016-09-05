@@ -1,9 +1,9 @@
-#include <Bounce2.h>
+//#include <Bounce2.h>
 #define relayPin 8
 #define onButton 12
-#define offButton 3
+#define offButton 11
 #define bounceInterval 5
-#define debugPin 13
+#define debugPin 17
 #define errorPin 7
 
 //Bounce onBounce = Bounce();  
@@ -27,11 +27,11 @@ void loop()
 
   if(digitalRead(onButton) == HIGH){
   	digitalWrite(relayPin, HIGH);
-  	digitalWrite(debugPin, HIGH);
+  	digitalWrite(debugPin, LOW);
    Serial.println("on");
   } else {
        Serial.println("off");
-  	digitalWrite(debugPin, LOW);
+  	digitalWrite(debugPin, HIGH);
 	digitalWrite(relayPin, LOW);
   }
   
