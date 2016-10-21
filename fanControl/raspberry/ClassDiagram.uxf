@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>50</x>
+      <y>150</y>
+      <w>320</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>
+Communicator
+
+--
+
++activateFans(int:id, bool:active): int
+-initiateUsbConnection(): FanStatus
+
+--
+Responsibilities
+- push status changes to controlpanel
+- control arduinos</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>470</y>
+      <w>300</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;struct&gt;&gt;
+FanStatus
+--
+-int:id
+-string:	devicePath
+-bool:	active
+-int:	error
+-boolean: malfunction
+-float:	temperature
+-float:	humidity
+
+--
+Responsibilities:
+-- Storage of the status of an fansystem</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>10</x>
+      <y>440</y>
+      <w>350</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>ControlPanel
+--
+
+--
++updateStatus(FanStatus: status): int
+--
+Responsibilities
+- Controling display
+- readout buttons
+- Communicate with Communicator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>590</x>
+      <y>320</y>
+      <w>80</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=0..1
+m2=0..n
+Has a&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>80</x>
+      <y>360</y>
+      <w>160</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+Buttenpress(event)</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>360</y>
+      <w>120</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+statusChange</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>500</x>
+      <y>140</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>fanStatusManager
+--
+-array:fanstatus
+--
++getFanStatus(int:id): FanStatus
++setFanstatus(FanStatus:status): FanStatus
++getFanStatus(): FanStatusArray
+--
+Responsibilities
+--
+interface to more FanStatus elements</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>360</x>
+      <y>150</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;20.0;140.0;10.0</additional_attributes>
+  </element>
+</diagram>
