@@ -11,12 +11,23 @@
 	 *
 	 */
 	struct fanstatus_t {
-		 int id = -1
-		 std::string devicepath = "/dev/null"
-		 bool:active = false
-		 bool:error = false
-		 float:temperature = 0.0
-		 float:humidity = 0.0
+		 int id;
+		 std::string devicepath;
+		 bool:active;
+		 bool:error;
+		 float:temperature;
+		 float:humidity;
+
+		/*fanstatus_t(){
+			id = -1;
+			devicepath = "/dev/null";
+			active = false;
+			error = false;
+			temperature = 0.0;
+			humidity = 0.0;
+		}*/
+
 	};
+
 
 #endif /* end include geard*/

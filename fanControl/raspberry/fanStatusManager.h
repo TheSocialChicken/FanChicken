@@ -27,7 +27,7 @@ public:
 	 * Postconditions: provided fanstatus struct is added or updated to the internal model. Added if a struct with the same ID is not present, updated if present. 
 	 * @Returns: a reference to the setted status
 	 */
-	public fanstatus_t setFanStatus(fanstatus_t status);
+	fanstatus_t setFanStatus(fanstatus_t status);
 
 
 	/*
@@ -36,14 +36,14 @@ public:
 	 *  @id the fanstatus you want to get
 	 *  @return: a copy of the fanstatus
 	 */
-	public fanstatus_t getFanStatus(int id);
+	fanstatus_t getFanStatus(int id);
 
 	/*
 	 *  preconditions: none
 	 *  postconditions: none
 	 *  @return: an array containing all elements in fanSystemArray, terminated with an NULL. 
 	 */
-	public fanstatus_t[] getFanStatus();
+	fanstatus_t[] getFanStatus();
 
 
 private:
