@@ -1,0 +1,2 @@
+#fanstatusManager
+g++ fanStatusManager.cpp fanStatusManager.h
