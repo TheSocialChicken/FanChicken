@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <string>
 #include "fanstatus.h"
-
+#include <vector>
 using namespace std;
 
 
@@ -43,13 +43,13 @@ public:
 	 *  postconditions: none
 	 *  @return: an array containing all elements in fanSystemArray, terminated with an NULL. 
 	 */
-	fanstatus_t[] getFanStatus();
+	std::vector<fanstatus_t> getFanStatus();
 
 
 private:
 
 	// array for holding fanstatus information
-	fanstatus_t fanList[5] = {};
+    std::vector<fanstatus_t> fanList;
 
 };
 

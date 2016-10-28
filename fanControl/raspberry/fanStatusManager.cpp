@@ -22,7 +22,7 @@ fanstatus_t fanStatusManager::getFanStatus(int id){
 	 assert(false);
 }
 
-fanstatus_t[] getFanStatus(){
+std::vector<fanstatus_t> getFanStatus(){
 	 //TODO: imlement this!
 	 assert(false);
 }
@@ -32,15 +32,12 @@ fanstatus_t[] getFanStatus(){
 //self test
 int main(int argc, char *argv[])
 {
-	assert(false);
 
-	fanStatusManager testManager = fanStatusManager::fanStatusManager();
-	//check if null
-	assert(testManager);
+	fanStatusManager testManager = fanStatusManager();
 	fanstatus_t testStatus;
-	fanStatusManager::setFanStatus(testStatus);
-	fanstatus_t = fanStatusManager::getFanStatus()
-	assert(fanstatus.id == -1);
+	testManager.setFanStatus(testStatus);
+	testStatus = testManager.getFanStatus(1);
+	assert(testStatus.id == -1);
 	
 	return 0;
 }
