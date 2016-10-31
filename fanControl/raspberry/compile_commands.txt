@@ -1,2 +1,5 @@
 #fanstatusManager
 g++ fanStatusManager.cpp fanStatusManager.h
+
+#communicator
+g++ Communicator.cpp
