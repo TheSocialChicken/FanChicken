@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include "fanStatusManager.h"
 
+using namespace std;
+
 class communicator{
 
 public:
@@ -32,7 +34,7 @@ private:
 	/*
 		Will initiate usb communication with one arduino. Returns its status. Status can be used as a reference for further communication
 	*/
-	fanStatusManager:fanstatus_t initiateUsbConnection();
+	fanstatus_t initiateUsbConnection();
 
-}
+};
 #endif /* ifndef COMMUNICTOR */
