@@ -14,6 +14,8 @@
 
 #include <wiringPi.h>
 #include <wiringSerial.h>
+#include <Communicator.h>
+
 
 using namespace std;
 
@@ -25,10 +27,13 @@ class controlPanel
 		 */
 		int updateStatus(fanstatus status);
 
-		//self test
-		int main(int argc, char *argv[]);
-
 	private:
 
+		/*
+		* These Methods should be called when a butten is pressed. It should pass the change in status on to the Communicator
+		*/
+		void button1StatusChange();
+		void button2StatusChange();
+		void button3StatusChange();
 }
 #endif /* end include geard*/
