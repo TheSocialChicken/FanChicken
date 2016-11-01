@@ -9,7 +9,7 @@
 
 #include "controlPanel.h"
 
-int controlPanel::updateStatus(fanstatus status){
+int controlPanel::updateStatus(fanstatus_t status){
 	assert(false);
 	//TODO implementation
 }

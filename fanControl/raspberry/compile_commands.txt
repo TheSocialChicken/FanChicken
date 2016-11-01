@@ -3,3 +3,7 @@ g++ fanStatusManager.cpp fanStatusManager.h
 
 #communicator
 g++ Communicator.cpp
+
+
+#control panel (FIXME: gives a linker error)
+g++ controlPanel.cpp -lwiringPi -L/usr/local/include

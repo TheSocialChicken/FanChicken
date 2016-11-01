@@ -12,9 +12,11 @@
 #ifndef controlPanelGuard
 #define controlPanelGuard
 
-#include <wiringPi.h>
+#include "fanstatus.h"
+#include "Communicator.h"
 #include <wiringSerial.h>
-#include <Communicator.h>
+#include <wiringPi.h>
+
 
 
 using namespace std;
@@ -25,7 +27,7 @@ class controlPanel
 		/* preconditions: system is connected and turned on
 		 * postconditions: statusindicators have been updated to reflect the status of passed fanstatus object
 		 */
-		int updateStatus(fanstatus status);
+		int updateStatus(fanstatus_t status);
 
 	private:
 
@@ -35,5 +37,5 @@ class controlPanel
 		void button1StatusChange();
 		void button2StatusChange();
 		void button3StatusChange();
-}
+};
 #endif /* end include geard*/
