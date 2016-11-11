@@ -6,25 +6,36 @@
 
 #include "fanStatusManager.h"
 #include <assert.h>
+#include <stdexcept>
+std::vector<fanstatus_t> fanList;
+
 
 fanStatusManager::fanStatusManager(){
 	//default constructor TODO
 }
 
 fanstatus_t fanStatusManager::setFanStatus(fanstatus_t status){
-	 //TODO: imlement this!
-	 assert(false);
+	for (std::size_t i = 0; i != fanList.size(); ++i) {
+		if(status.id == fanList[i].id){
+			fanList[i] = status;
+			return fanList[i];
+		}
+	} 
+	// if this for-loop has been completed, that means that the elemente has not been added to the list yet.
+	fanList.push_back(status);
 }
 
-
 fanstatus_t fanStatusManager::getFanStatus(int id){
-	 //TODO: imlement this!
-	 assert(false);
+	for (std::size_t i = 0; i != fanList.size(); ++i) {
+		if(id == fanList[i].id){
+			return fanList[i];
+		}
+	} 
+	throw std::invalid_argument( "Asked element is not in the list" );
 }
 
 std::vector<fanstatus_t> getFanStatus(){
-	 //TODO: imlement this!
-	 assert(false);
+	 return fanList;
 }
 
 
@@ -36,7 +47,7 @@ int main(int argc, char *argv[])
 	fanStatusManager testManager = fanStatusManager();
 	fanstatus_t testStatus;
 	testManager.setFanStatus(testStatus);
-	testStatus = testManager.getFanStatus(1);
+	testStatus = testManager.getFanStatus(0);
 	assert(testStatus.id == -1);
 	
 	return 0;

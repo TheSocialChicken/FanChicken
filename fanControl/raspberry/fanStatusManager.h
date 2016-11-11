@@ -33,6 +33,7 @@ public:
 	/*
 	 *  preconditions: fan status must exist
 	 *  postconditions: none
+	 *  @throws exeption if element is not in list
 	 *  @id the fanstatus you want to get
 	 *  @return: a copy of the fanstatus
 	 */
@@ -41,15 +42,13 @@ public:
 	/*
 	 *  preconditions: none
 	 *  postconditions: none
-	 *  @return: an array containing all elements in fanSystemArray, terminated with an NULL. 
+	 *  @return: an vector containing all elements in fanSystemArray, terminated with an NULL. 
 	 */
 	std::vector<fanstatus_t> getFanStatus();
 
 
 private:
 
-	// array for holding fanstatus information
-    std::vector<fanstatus_t> fanList;
 
 };
 
