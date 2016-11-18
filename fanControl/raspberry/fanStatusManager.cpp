@@ -37,18 +37,3 @@ fanstatus_t fanStatusManager::getFanStatus(int id){
 std::vector<fanstatus_t> getFanStatus(){
 	 return fanList;
 }
-
-
-
-//self test
-int main(int argc, char *argv[])
-{
-
-	fanStatusManager testManager = fanStatusManager();
-	fanstatus_t testStatus;
-	testManager.setFanStatus(testStatus);
-	testStatus = testManager.getFanStatus(0);
-	assert(testStatus.id == -1);
-	
-	return 0;
-}

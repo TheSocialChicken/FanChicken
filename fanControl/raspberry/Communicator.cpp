@@ -23,14 +23,3 @@
 		assert(false);
 		//TODO implementation
 	}
-
-//self test
-int main(int argc, char *argv[])
-{
-
-	// class is not suitable for self-testing. Always test as valid
-	assert(true); 
-
-
-	return 0;
-}

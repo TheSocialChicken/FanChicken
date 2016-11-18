@@ -31,11 +31,3 @@ void controlPanel::button3StatusChange(){
 }
 
 //TODO, create watch methods for buttons. 
-
-//sef test
-int main(int argc, char *argv[]){
-	//TODO selftest implementation
-	assert(false);
-
-	return 0;
-}

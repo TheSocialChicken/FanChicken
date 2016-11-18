@@ -14,12 +14,13 @@
 
 #include "fanstatus.h"
 #include "Communicator.h"
-#include <wiringSerial.h>
-#include <wiringPi.h>
+
+//TODO: uncomment when implementing pi stuff
+//#include <wiringSerial.h>
+//#include <wiringPi.h>
 
 
 
-using namespace std;
 
 class controlPanel 
 {
