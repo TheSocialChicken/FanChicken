@@ -21,7 +21,8 @@ void testCommunicator(){
 }
 
 void testControlPanel(){
-    
+    //TODO IMPLEMENTATION
+    assert(false);
 }
 
 //dirty way to test all the subclasses
@@ -34,7 +35,5 @@ void testMe(){
 int main(int argc, char *argv[]){
 	//todo imlementation. 
     	testMe(); // can be removed in production
-	assert(false);
-
 	return 0;
 }
