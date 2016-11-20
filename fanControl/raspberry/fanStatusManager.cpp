@@ -31,7 +31,7 @@ fanstatus_t fanStatusManager::getFanStatus(int id){
 			return fanList[i];
 		}
 	} 
-	throw std::invalid_argument( "Asked element is not in the list" );
+	throw std::invalid_argument( "fanStatusManager::getFanStatus Asked element is not in the list" );
 }
 
 std::vector<fanstatus_t> getFanStatus(){

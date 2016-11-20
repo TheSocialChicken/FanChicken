@@ -1,4 +1,4 @@
-
+#include <iostream>
 #include "Communicator.h"
 #include "controlPanel.h"
 #include "fanStatusManager.h"
@@ -9,8 +9,10 @@ void testFanStatusManager(){
     fanStatusManager testManager = fanStatusManager();
 	fanstatus_t testStatus;
 	testManager.setFanStatus(testStatus);
-	testStatus = testManager.getFanStatus(0);
+	testStatus = testManager.getFanStatus(-1);
 	assert(testStatus.id == -1);
+	std::cout << "fanStatusManager survived the test!";
+
 }
 
 void testCommunicator(){
