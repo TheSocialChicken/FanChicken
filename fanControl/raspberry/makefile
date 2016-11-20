@@ -2,7 +2,7 @@ CC=g++
 CFLAGS=
 
 all: main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp 
-	$(CC) main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp -o main
+	$(CC) -g main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp -lwiringPi -lwiringPiDev -o main
 
 
 # quick and dirty commands for easier testing. 

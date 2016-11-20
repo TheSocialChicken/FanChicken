@@ -15,9 +15,9 @@
 #include "fanstatus.h"
 #include "Communicator.h"
 
-//TODO: uncomment when implementing pi stuff
-//#include <wiringSerial.h>
-//#include <wiringPi.h>
+//This regueres wiringPi to be installed
+#include <wiringSerial.h>
+#include <wiringPi.h>
 
 
 
