@@ -4,6 +4,8 @@
 #include "fanStatusManager.h"
 #include "fanstatus.h"
 
+#define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
+
 void testFanStatusManager(){
     
     fanStatusManager testManager = fanStatusManager();
@@ -33,6 +35,8 @@ void testMe(){
 }
 
 int main(int argc, char *argv[]){
+    UNUSED(argc);
+    UNUSED(argv);
 	//todo imlementation. 
     	testMe(); // can be removed in production
 	return 0;

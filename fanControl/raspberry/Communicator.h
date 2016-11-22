@@ -14,8 +14,8 @@
 #include <assert.h>
 #include <stdio.h>
 #include "fanStatusManager.h"
-
-using namespace std;
+#include <string>
+#include <sstream>
 
 class communicator{
 

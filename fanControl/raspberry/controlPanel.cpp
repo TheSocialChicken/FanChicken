@@ -6,10 +6,12 @@
  * Distributed under terms of the MIT license.
  */
 
+#define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
 
 #include "controlPanel.h"
 
 int controlPanel::updateStatus(fanstatus_t status){
+    UNUSED(status);
 	assert(false);
 	//TODO implementation
 }

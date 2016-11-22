@@ -23,6 +23,7 @@ fanstatus_t fanStatusManager::setFanStatus(fanstatus_t status){
 	} 
 	// if this for-loop has been completed, that means that the elemente has not been added to the list yet.
 	fanList.push_back(status);
+	return fanList.back();
 }
 
 fanstatus_t fanStatusManager::getFanStatus(int id){
