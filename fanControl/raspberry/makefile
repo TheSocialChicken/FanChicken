@@ -1,22 +1,10 @@
 CC=g++
-CFLAGS=
+CFLAGS= -g -lwiringPi -lwiringPiDev -std=c++0x -Wall -Wextra -pedantic-errors -Werror
+
+
 
 all: main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp 
-	$(CC) -g main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp -lwiringPi -lwiringPiDev -o main
-
-
-# quick and dirty commands for easier testing. 
-#DEPRICATED
-fanstatusmanager: fanStatusManager.cpp
-	$(CC) fanStatusManager.cpp fanStatusManager.h $(CFLAGS) -o fanStatusManagerTest
-
-#DEPRICATED
-controlpanel: controlPanel.cpp
-	$(CC) controlPanel.cpp -lwiringPi -L/usr/local/include -o controlPanelTest
-
-#DEPRICATED
-communicator: Communicator.cpp
-	$(CC) Communicator.cpp -o CommunicatorTest
+	$(CC) main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp $(CFLAGS) -o main
 
 clean:
 	rm -f fanStatusManagerTest controlPanelTest CommunicatorTest main
