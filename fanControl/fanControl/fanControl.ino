@@ -23,15 +23,24 @@ void setup()
 
 void loop()
 {
-  Serial.println("loop");
+  
+  char piSignal = 'x';
+  while(Serial.available() != 0){
+  	piSignal = Serial.read();
+  }
 
-  if(digitalRead(onButton) == HIGH){
+if(piSignal != 'x'){
+  Serial.print("received: ");
+  Serial.println(piSignal);
+}
+  if(piSignal == '0'){
   	digitalWrite(relayPin, HIGH);
   	digitalWrite(debugPin, LOW);
    Serial.println("on");
-  } else {
-       Serial.println("off");
-  	digitalWrite(debugPin, HIGH);
+  } 
+  if(piSignal == '1'){
+  Serial.println("off");
+  digitalWrite(debugPin, HIGH);
 	digitalWrite(relayPin, LOW);
   }
   
