@@ -29,7 +29,11 @@ public:
 	 * will provide an error code if id provided is not connected to 
 	 */
 	int activateFans(int id, bool active);
-
+        
+        /*
+         * same as activate
+         */
+        int activateFans(string devicePath, bool active);
 private:
 	/*
 		Will initiate usb communication with one arduino. Returns its status. Status can be used as a reference for further communication
