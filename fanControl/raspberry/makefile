@@ -3,8 +3,8 @@ CFLAGS= -g -lwiringPi -lwiringPiDev -std=c++0x -Wall -Wextra -pedantic-errors -W
 
 
 
-all: main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp 
-	$(CC) main.cpp Communicator.cpp controlPanel.cpp fanStatusManager.cpp $(CFLAGS) -o main
+all: main.cpp Communicator.cpp controlPanel.cpp 
+	$(CC) main.cpp Communicator.cpp controlPanel.cpp $(CFLAGS) -o main
 
 clean:
 	rm -f fanStatusManagerTest controlPanelTest CommunicatorTest main

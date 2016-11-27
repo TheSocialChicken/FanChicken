@@ -1,24 +1,12 @@
 #include <iostream>
 #include "Communicator.h"
 #include "controlPanel.h"
-#include "fanStatusManager.h"
 #include "fanstatus.h"
 #include <fstream>
 #include <chrono>
 #include <thread>
 
 #define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
-
-void testFanStatusManager(){
-    
-    fanStatusManager testManager = fanStatusManager();
-	fanstatus_t testStatus;
-	testManager.setFanStatus(testStatus);
-	testStatus = testManager.getFanStatus(-1);
-	assert(testStatus.id == -1);
-	std::cout << "fanStatusManager survived the test!";
-
-}
 
 void testCommunicator(){
     //TODO IMPLEMENTATION
@@ -31,8 +19,7 @@ void testControlPanel(){
 }
 
 //dirty way to test all the subclasses
-void testMe(){
-    testFanStatusManager();
+void testMe() {
     testCommunicator();
     testControlPanel();
 }

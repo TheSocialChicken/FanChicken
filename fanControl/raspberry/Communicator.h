@@ -13,9 +13,12 @@
 
 #include <assert.h>
 #include <stdio.h>
-#include "fanStatusManager.h"
+#include "fanstatus.h"
 #include <string>
 #include <sstream>
+#include <fstream>
+#include <iostream>
+#include <vector>
 
 class communicator{
 
@@ -31,14 +34,23 @@ public:
 	int activateFans(int id, bool active);
         
         /*
-         * same as activate
-         */
-        int activateFans(string devicePath, bool active);
+     * same as activate
+     */
+    int activateFans(std::string devicePath, bool active);
 private:
-	/*
-		Will initiate usb communication with one arduino. Returns its status. Status can be used as a reference for further communication
-	*/
-	fanstatus_t initiateUsbConnection();
+    /*
+     * vector that contains all the information about the Fans
+     */
+    
+    std::vector<fanstatus_t> fanList;
+    /*
+     * Updates internal fanList. After function returns, all the information in the fanList should be up-to-date.
+     */
+    void refreshStatus();
 
+    /*
+     * Pushes the fanList to the controlPanel. 
+     */
+    void pushUpdates();
 };
 #endif /* ifndef COMMUNICTOR */

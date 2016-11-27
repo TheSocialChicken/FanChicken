@@ -9,8 +9,9 @@
 #define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
 
 #include "Communicator.h"
-#include <fstream>
-#include <iostream>
+using namespace std;
+
+
 
 const string arduinoDevPath = "/dev/ACM"; //without number
 
@@ -46,15 +47,14 @@ const string arduinoDevPath = "/dev/ACM"; //without number
 		    return 0;
 	    }
 	return 1;
-	}
+}
 
-	fanstatus_t communicator::initiateUsbConnection() {
-	 /*   for (int i = 0; i < 10; i++) {
-		string elem(arduinoDevPath + std::to_string(i));
+void communicator::refreshStatus() {
+    //TODO implementation
+}
 
-	    }
-	*/		
-	    
-	    	assert(false);
-		//TODO implementation
-	}
+void communicator::pushUpdates() {
+    //TODO implementation
+}
+
+
