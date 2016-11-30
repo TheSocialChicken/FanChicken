@@ -14,11 +14,12 @@
 #include <assert.h>
 #include <stdio.h>
 #include "fanstatus.h"
-#include <string>
+#include <string.h>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <stdio.h>
 
 class communicator{
 
@@ -52,5 +53,16 @@ private:
      * Pushes the fanList to the controlPanel. 
      */
     void pushUpdates();
+
+    /*
+     * List current arduino devices is /dev/
+     */
+    std::vector<std::string> getArduinoDevicePaths();
+
+
+    /*
+     * Get the status of the specified device, return its status as an fanstatus_t struct
+     */
+    fanstatus_t getStatus(fanstatus_t);
 };
 #endif /* ifndef COMMUNICTOR */
