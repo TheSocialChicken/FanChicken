@@ -32,11 +32,16 @@ void loop()
   if(fanActive){
   	digitalWrite(relayPin, HIGH);
   	digitalWrite(debugPin, LOW);
-  } 
-  if(!fanActive){
-  	digitalWrite(debugPin, HIGH);
-	digitalWrite(relayPin, LOW);
+  } else { 
+    if(!fanActive){
+     	digitalWrite(debugPin, HIGH);
+    	digitalWrite(relayPin, LOW);
+    } else {
+      digitalWrite(errorPin, HIGH);
+      Serial.println("ERROR");
+    }
   }
+
 
 	updateStatus();
   
@@ -94,7 +99,9 @@ void sendVerboseStatus(){
 	Serial.println();
 }
 
+//It is a bit dirty to convert evyrithing to a char first, but it will do for now. 
 void sendStatus(){
+	Serial.print('U'); //indicate to raspberry that you are going te do an update
 	Serial.print(fanActive);
 	Serial.print(',');
 	Serial.print(error);
