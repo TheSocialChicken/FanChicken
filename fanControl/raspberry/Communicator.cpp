@@ -143,9 +143,3 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
 
     return returnStatus;
 }
-
-void communicator::pushUpdates() {
-    //TODO implementation
-}
-
-

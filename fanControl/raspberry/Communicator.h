@@ -43,18 +43,16 @@ public:
      * Updates internal fanList. After function returns, all the information in the fanList should be up-to-date.
      */
     void refreshStatus();
+
+    /*
+     * Get a fanstatus with the specified ID
+     */
+    fanstatus_t getStatusFromID(int);
 private:
     /*
      * vector that contains all the information about the Fans
      */
-    
     std::vector<fanstatus_t> fanList;
-    
-
-    /*
-     * Pushes the fanList to the controlPanel. 
-     */
-    void pushUpdates();
 
     /*
      * List current arduino devices is /dev/
@@ -68,9 +66,6 @@ private:
      */
     fanstatus_t getStatus(fanstatus_t);
 
-    /*
-     * Get a fanstatus with the specified ID
-     */
-    fanstatus_t getStatusFromID(int);
+
 };
 #endif /* ifndef COMMUNICTOR */
