@@ -8,9 +8,9 @@
 
 #define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
 
-void testCommunicator(){
-    //TODO IMPLEMENTATION
-    assert(false);
+void testCommunicator() {
+    communicator commie;
+    commie.refreshStatus();
 }
 
 void testControlPanel(){

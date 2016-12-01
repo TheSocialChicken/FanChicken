@@ -38,16 +38,18 @@ public:
      * same as activate
      */
     int activateFans(std::string devicePath, bool active);
+
+    /*
+     * Updates internal fanList. After function returns, all the information in the fanList should be up-to-date.
+     */
+    void refreshStatus();
 private:
     /*
      * vector that contains all the information about the Fans
      */
     
     std::vector<fanstatus_t> fanList;
-    /*
-     * Updates internal fanList. After function returns, all the information in the fanList should be up-to-date.
-     */
-    void refreshStatus();
+    
 
     /*
      * Pushes the fanList to the controlPanel. 
