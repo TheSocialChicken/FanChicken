@@ -20,10 +20,25 @@ communicator::communicator() {
 }
 
 int communicator::activateFans(int id, bool active) {
-    UNUSED(id);
-    UNUSED(active);
-    assert(false);
-    //TODO implementation
+    fanstatus_t status = getStatusFromID(id);
+    if (status.id == -1) {
+        return 1;
+    } else {
+        activateFans(status.devicepath, active);
+        return 0;
+    }
+}
+
+fanstatus_t communicator::getStatusFromID(int id) {
+    for (unsigned int i = 0; i < fanList.size(); i++) {
+        fanstatus_t elem = fanList.at(id);
+        if (elem.id == id) {
+            return elem;
+        }
+    }
+    fanstatus_t noStatusFound;
+    noStatusFound.id = -1;
+    return noStatusFound;
 }
 
 int communicator::activateFans(string devicePath, bool active) {

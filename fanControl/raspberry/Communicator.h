@@ -64,7 +64,13 @@ private:
 
     /*
      * Get the status of the specified device, return its status as an fanstatus_t struct
+     * returns a fanstatus with id -1 if none is found
      */
     fanstatus_t getStatus(fanstatus_t);
+
+    /*
+     * Get a fanstatus with the specified ID
+     */
+    fanstatus_t getStatusFromID(int);
 };
 #endif /* ifndef COMMUNICTOR */
