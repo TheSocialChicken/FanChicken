@@ -12,9 +12,9 @@
 
 bool fanActive = false;
 bool error = false;
-float temperature = -50;
-float humidity = -50;
-unsigned long SensorMilliSecCount= millis();
+float temperature;
+float humidity;
+unsigned long SensorMilliSecCount = millis();
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -33,91 +33,90 @@ void setup()
 void loop()
 {
 
-  if(fanActive){
-  	digitalWrite(relayPin, HIGH);
-  	digitalWrite(debugPin, LOW);
-  } else { 
-    if(!fanActive){
-     	digitalWrite(debugPin, HIGH);
-    	digitalWrite(relayPin, LOW);
+  if (fanActive) {
+    digitalWrite(relayPin, HIGH);
+    digitalWrite(debugPin, LOW);
+  } else {
+    if (!fanActive) {
+      digitalWrite(debugPin, HIGH);
+      digitalWrite(relayPin, LOW);
     } else {
       digitalWrite(errorPin, HIGH);
       Serial.println("ERROR");
     }
   }
-	updateStatus();
-  
+  updateStatus();
+
 }
 
 char piSignal;
 /*
- * reads out sensors and serial line. 
- * Sends information back to pi if requested
- */
-void updateStatus(){
-  
-	while(Serial.available() != 0){
- 		piSignal = Serial.read();
-	}
+   reads out sensors and serial line.
+   Sends information back to pi if requested
+*/
+void updateStatus() {
 
-	switch(piSignal){
+  while (Serial.available() != 0) {
+    piSignal = Serial.read();
+  }
 
-	case '0':
-		fanActive = true;
-		break;
-	case '1':
-		fanActive = false;	
-		break;
-	case '2':
-		sendStatus();
-		break;
-  case '3':
-    sendVerboseStatus();
-  case 'x':
-    //nothing received, do nothing
-    break;
-	default:
-	  Serial.print("received: ");
-	  Serial.println(piSignal);
-	}
+  switch (piSignal) {
 
-	piSignal = 'x';
+    case '0':
+      fanActive = true;
+      break;
+    case '1':
+      fanActive = false;
+      break;
+    case '2':
+      sendStatus();
+      break;
+    case '3':
+      sendVerboseStatus();
+    case 'x':
+      //nothing received, do nothing
+      break;
+    default:
+      Serial.print("received: ");
+      Serial.println(piSignal);
+  }
 
-	readDHT();
+  piSignal = 'x';
+
+  readDHT();
 }
 
-void sendVerboseStatus(){
-	Serial.println();
-	Serial.print("fanActive:");
-	Serial.println(fanActive);
-	Serial.print("error:");
-	Serial.println(error);
-	Serial.print("temperature:");
-	Serial.println(temperature);
-	Serial.print("humidity:");
-	Serial.println(humidity);
-	Serial.println();
+void sendVerboseStatus() {
+  Serial.println();
+  Serial.print("fanActive:");
+  Serial.println(fanActive);
+  Serial.print("error:");
+  Serial.println(error);
+  Serial.print("temperature:");
+  Serial.println(temperature);
+  Serial.print("humidity:");
+  Serial.println(humidity);
+  Serial.println();
 }
 
-//It is a bit dirty to convert evyrithing to a char first, but it will do for now. 
-void sendStatus(){
-	Serial.print('U'); //indicate to raspberry that you are going te do an update
-	Serial.print(fanActive);
-	Serial.print(',');
-	Serial.print(error);
-	Serial.print(',');
-	Serial.print(temperature);
-	Serial.print(',');
-	Serial.print(humidity);
-	Serial.print('\n');
+//It is a bit dirty to convert evyrithing to a char first, but it will do for now.
+void sendStatus() {
+  Serial.print('U'); //indicate to raspberry that you are going te do an update
+  Serial.print(fanActive);
+  Serial.print(',');
+  Serial.print(error);
+  Serial.print(',');
+  Serial.print(temperature);
+  Serial.print(',');
+  Serial.print(humidity);
+  Serial.print('\n');
 }
 
-//TODO NEEDS TESTING
-void readDHT(){
-	//self implemented non-blocking timer)
-	if(SensorMilliSecCount + 5000 < millis()){
-		humidity = dht.readHumidity();
-		temperature = dht.readTemperature();		
-	}
+void readDHT() {
+  self implemented non-blocking timer)
+  if (SensorMilliSecCount + 1000 < millis()) {
+    humidity = dht.readHumidity();
+    temperature = dht.readTemperature();
+  }
 
 }
