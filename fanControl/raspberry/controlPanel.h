@@ -25,6 +25,11 @@
 class controlPanel 
 {
 	public:
+	    	/*
+		 Default compiler, sets up wiringPi and the like. 
+		 */
+		controlPanel(communicator *commie);
+		
 		/* preconditions: system is connected and turned on
 		 * postconditions: statusindicators have been updated to reflect the status of passed fanstatus object
 		 */
@@ -33,7 +38,8 @@ class controlPanel
 	private:
 
 		/*
-		* These Methods should be called when a butten is pressed. It should pass the change in status on to the Communicator
+     * These Methods should be called when a button is pressed. It should check the status of the button status and pass the state along to the communicator.
+     *
 		*/
 		void button1StatusChange();
 		void button2StatusChange();
