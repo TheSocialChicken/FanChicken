@@ -15,9 +15,8 @@ void testCommunicator() {
 
 void testControlPanel(){
     communicator commie;
-    controlPanel panel(&commie);
-    //TODO IMPLEMENTATION
-    assert(false);
+    commie.refreshStatus();
+    controlPanel panel(&commie); //test interupts manually
 }
 
 //dirty way to test all the subclasses
@@ -26,10 +25,19 @@ void testMe() {
     testControlPanel();
 }
 
+void sleep(int seconds){
+    std::chrono::seconds dura(seconds);
+    std::this_thread::sleep_for( dura );
+}
+
+
 int main(int argc, char *argv[]){
     UNUSED(argc);
     UNUSED(argv);
 	//todo imlementation. 
     testMe(); // can be removed in production
+    sleep(60);
+	//todo periodicly refresh the status of the system
+
     return 0;
 }

@@ -101,8 +101,8 @@ vector<string> communicator::getArduinoDevicePaths() {
             returnVar.push_back(path);
         }
     }
-    return returnVar;
     mutexComm.unlock();
+    return returnVar;
 }
 
 fanstatus_t communicator::getStatus(fanstatus_t argStatus) {

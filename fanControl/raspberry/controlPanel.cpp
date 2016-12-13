@@ -13,7 +13,7 @@
 #include <mutex>
 
 communicator* comm;
-std::mutex muInterupt;
+std::mutex muInterupt; //prevent multiple interrupts from being handled .simultaneously Should not be necessary, but can never be to careful. 
 
 // very handy site for pinouts: https://pinout.xyz/
 
