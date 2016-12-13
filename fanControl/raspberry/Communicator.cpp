@@ -11,8 +11,10 @@
 #define FANON 1
 #define FANINFO 2
 #include "Communicator.h"
-
+#include <mutex>
 using namespace std;
+
+std::mutex mutexComm;
 
 communicator::communicator() {
     //default contructor
@@ -42,6 +44,7 @@ fanstatus_t communicator::getStatusFromID(int id) {
 }
 
 int communicator::activateFans(string devicePath, bool active) {
+    mutexComm.lock();
     system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts"); //Activates the tty connection with the Arduino,
 
     ifstream Arduino_Input(devicePath); //Opens the tty connection as an ifstream
@@ -60,11 +63,12 @@ int communicator::activateFans(string devicePath, bool active) {
         flush(std::cout);
         return 0;
     }
+    mutexComm.unlock();
     return 1;
 }
 
 void communicator::refreshStatus() {
-    //TODO TEST THIS METHOD
+    mutexComm.lock();
 
     fanList.clear(); //empty device list
     vector<string> devicePaths = getArduinoDevicePaths();
@@ -81,9 +85,11 @@ void communicator::refreshStatus() {
     for (unsigned int i = 0; i < fanList.size(); i++) {
         fanList.at(i) = getStatus(fanList.at(i));
     }
+    mutexComm.unlock();
 }
 
 vector<string> communicator::getArduinoDevicePaths() {
+    mutexComm.lock();
     vector<string> returnVar;
 
     const string arduinoDevicePath = "/dev/ttyACM"; //without number
@@ -96,9 +102,11 @@ vector<string> communicator::getArduinoDevicePaths() {
         }
     }
     return returnVar;
+    mutexComm.unlock();
 }
 
 fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
+    mutexComm.lock();
     fanstatus_t returnStatus = argStatus;
 
     system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts"); //Activates the tty connection with the Arduino,
@@ -141,5 +149,6 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
         returnStatus.humidity = ::atof(humidity.c_str());
     }
 
+    mutexComm.unlock();
     return returnStatus;
 }
