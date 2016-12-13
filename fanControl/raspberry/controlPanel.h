@@ -41,8 +41,8 @@ class controlPanel
      * These Methods should be called when a button is pressed. It should check the status of the button status and pass the state along to the communicator.
      *
 		*/
-		void button1StatusChange();
-		void button2StatusChange();
-		void button3StatusChange();
+		static void button1StatusChange();
+		static void button2StatusChange();
+		static void button3StatusChange();
 };
 #endif /* end include geard*/

@@ -14,6 +14,8 @@ void testCommunicator() {
 }
 
 void testControlPanel(){
+    communicator commie;
+    controlPanel panel(&commie);
     //TODO IMPLEMENTATION
     assert(false);
 }
