@@ -89,7 +89,6 @@ void communicator::refreshStatus() {
 }
 
 vector<string> communicator::getArduinoDevicePaths() {
-    mutexComm.lock();
     vector<string> returnVar;
 
     const string arduinoDevicePath = "/dev/ttyACM"; //without number
@@ -101,7 +100,6 @@ vector<string> communicator::getArduinoDevicePaths() {
             returnVar.push_back(path);
         }
     }
-    mutexComm.unlock();
     return returnVar;
 }
 

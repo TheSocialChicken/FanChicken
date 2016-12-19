@@ -35,6 +35,8 @@ class controlPanel
 		 */
 		int updateStatus(fanstatus_t status);
 
+		void checkButtonStatus();
+
 	private:
 
 		/*

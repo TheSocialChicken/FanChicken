@@ -5,7 +5,7 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
-
+#include "debug.h"
 #define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
 
 void testCommunicator() {
@@ -32,12 +32,20 @@ void sleep(int seconds){
 
 
 int main(int argc, char *argv[]){
+    DEBUG_MSG("Program started, debug mode enabled");
     UNUSED(argc);
     UNUSED(argv);
-	//todo imlementation. 
-    testMe(); // can be removed in production
-    sleep(60);
-	//todo periodicly refresh the status of the system
+    //todo imlementation. 
+    //testMe(); // can be removed in production
 
+    communicator commie;
+    commie.refreshStatus();
+    controlPanel panel(&commie); //test interupts manually
+    while (true) {
+	DEBUG_MSG("Whiletrueloop lololol");
+        //panel.checkButtonStatus();
+        //todo periodicly refresh the status of the system
+        sleep(10);
+    }
     return 0;
 }

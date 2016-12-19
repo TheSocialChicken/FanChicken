@@ -7,10 +7,11 @@
  */
 #define UNUSED(x) (void)(x) //temporary supress unused parameter compiler warnings
 #define BUTTON1PIN 23
-#define BUTTON2PIN 23
-#define BUTTON3PIN 23
+#define BUTTON2PIN 24
+#define BUTTON3PIN 25
 #include "controlPanel.h"
 #include <mutex>
+#include "debug.h"
 
 communicator* comm;
 std::mutex muInterupt; //prevent multiple interrupts from being handled .simultaneously Should not be necessary, but can never be to careful. 
@@ -18,6 +19,7 @@ std::mutex muInterupt; //prevent multiple interrupts from being handled .simulta
 // very handy site for pinouts: https://pinout.xyz/
 
 controlPanel::controlPanel(communicator* commie) {
+    DEBUG_MSG("controlPanel starts initialized");
     wiringPiSetupGpio(); //use GPIO numbering scheme
     pinMode(BUTTON1PIN,INPUT);
     pullUpDnControl(BUTTON1PIN, PUD_DOWN);
@@ -41,21 +43,38 @@ int controlPanel::updateStatus(fanstatus_t status){
     //TODO implementation, need to get a display working properly for this to work. 
 }
 
+void controlPanel::checkButtonStatus() {
+    DEBUG_MSG("Checking all button status");
+    button1StatusChange();
+    button2StatusChange();
+    button3StatusChange();
+}
+
+
 void controlPanel::button1StatusChange(){
+    DEBUG_MSG("button1StatusChange method entered");
     muInterupt.lock();
-    (digitalRead(BUTTON1PIN) == 1) ? comm->activateFans(1, true) : comm->activateFans(1, false);	
+    int pinReadout = digitalRead(BUTTON1PIN); 
+    DEBUG_MSG("Button 1 status = "); DEBUG_MSG(pinReadout);
+    (pinReadout) ? comm->activateFans(1, true) : comm->activateFans(1, false);	
     muInterupt.unlock();
 }
 
 void controlPanel::button2StatusChange(){
+    DEBUG_MSG("button2StatusChange method entered");
     muInterupt.lock();
-    (digitalRead(BUTTON2PIN) == 1) ? comm->activateFans(2, true) : comm->activateFans(2, false);	
+    int pinReadout = digitalRead(BUTTON2PIN); 
+    DEBUG_MSG("Button 2 status = "); DEBUG_MSG(pinReadout);
+    (pinReadout) ? comm->activateFans(1, true) : comm->activateFans(1, false);	
     muInterupt.unlock();
 }
 
 void controlPanel::button3StatusChange(){
+    DEBUG_MSG("button3StatusChange method entered");
     muInterupt.lock();
-    (digitalRead(BUTTON3PIN) == 1) ? comm->activateFans(3, true) : comm->activateFans(3, false);
+    int pinReadout = digitalRead(BUTTON3PIN); 
+    DEBUG_MSG("Button 3 status = "); DEBUG_MSG(pinReadout);
+    (pinReadout) ? comm->activateFans(1, true) : comm->activateFans(1, false);	
     muInterupt.unlock();
 }
 
