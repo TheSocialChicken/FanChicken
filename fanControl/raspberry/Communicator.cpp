@@ -12,6 +12,7 @@
 #define FANINFO 2
 #include "Communicator.h"
 #include <mutex>
+#include "debug.h"
 using namespace std;
 
 std::mutex mutexComm;
@@ -22,6 +23,9 @@ communicator::communicator() {
 }
 
 int communicator::activateFans(int id, bool active) {
+    DEBUG_MSG("ActiveFans Method Entered");
+    DEBUG_MSG("ID = " << id);
+    DEBUG_MSG("active = " << active);
     fanstatus_t status = getStatusFromID(id);
     if (status.id == -1) {
         return 1;
@@ -45,6 +49,8 @@ fanstatus_t communicator::getStatusFromID(int id) {
 
 int communicator::activateFans(string devicePath, bool active) {
     mutexComm.lock();
+    DEBUG_MSG("Accasing device on " << devicePath << ", activate=" << active);
+    //TODO make static reference to /dev/ttyACM0 dynamic in order to account for multliply clients
     system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts"); //Activates the tty connection with the Arduino,
 
     ifstream Arduino_Input(devicePath); //Opens the tty connection as an ifstream
@@ -68,6 +74,7 @@ int communicator::activateFans(string devicePath, bool active) {
 }
 
 void communicator::refreshStatus() {
+    DEBUG_MSG("refresing device status...");
     mutexComm.lock();
 
     fanList.clear(); //empty device list
@@ -86,6 +93,7 @@ void communicator::refreshStatus() {
         fanList.at(i) = getStatus(fanList.at(i));
     }
     mutexComm.unlock();
+    DEBUG_MSG("refresing device status... DONE!");
 }
 
 vector<string> communicator::getArduinoDevicePaths() {
@@ -107,6 +115,8 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
     mutexComm.lock();
     fanstatus_t returnStatus = argStatus;
 
+    //TODO: test if monented out command below actually works.
+//    string sysCommand = "stty -F " + argStatus.devicepath + "cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts"
     system("stty -F /dev/ttyACM0 cs8 9600 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts"); //Activates the tty connection with the Arduino,
 
     ifstream Arduino_Input(argStatus.devicepath); //Opens the tty connection as an ifstream
