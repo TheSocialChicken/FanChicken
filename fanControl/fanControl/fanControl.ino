@@ -113,7 +113,7 @@ void sendStatus() {
 }
 
 void readDHT() {
-  self implemented non-blocking timer)
+//  self implemented non-blocking timer)
   if (SensorMilliSecCount + 1000 < millis()) {
     humidity = dht.readHumidity();
     temperature = dht.readTemperature();
