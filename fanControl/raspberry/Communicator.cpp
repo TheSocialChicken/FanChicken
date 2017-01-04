@@ -37,7 +37,7 @@ int communicator::activateFans(int id, bool active) {
 
 fanstatus_t communicator::getStatusFromID(int id) {
     for (unsigned int i = 0; i < fanList.size(); i++) {
-        fanstatus_t elem = fanList.at(id);
+        fanstatus_t elem = fanList.at(i);
         if (elem.id == id) {
             return elem;
         }
@@ -48,6 +48,9 @@ fanstatus_t communicator::getStatusFromID(int id) {
 }
 
 int communicator::activateFans(string devicePath, bool active) {
+    DEBUG_MSG("ActiveFans Method Entered");
+    DEBUG_MSG("devicePath = " << devicePath);
+    DEBUG_MSG("active = " << active);
     mutexComm.lock();
     DEBUG_MSG("Accasing device on " << devicePath << ", activate=" << active);
     //TODO make static reference to /dev/ttyACM0 dynamic in order to account for multliply clients
