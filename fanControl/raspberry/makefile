@@ -2,7 +2,7 @@ CC=g++
 CFLAGS= -g -lwiringPi -lwiringPiDev -std=c++0x -Wall -Wextra -pedantic-errors -Werror
 REMOTEHOST=pi@10.209.10.221
 
-
+#TODO: improve makefile to only compile what is neccesary
 all: main.cpp Communicator.cpp controlPanel.cpp 
 	$(CC) main.cpp Communicator.cpp controlPanel.cpp $(CFLAGS) -o main
 
