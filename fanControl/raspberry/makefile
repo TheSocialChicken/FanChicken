@@ -1,6 +1,6 @@
 CC=g++
 CFLAGS= -g -lwiringPi -lwiringPiDev -std=c++0x -Wall -Wextra -pedantic-errors -Werror
-
+REMOTEHOST=pi@10.209.10.221
 
 
 all: main.cpp Communicator.cpp controlPanel.cpp 
@@ -10,7 +10,7 @@ clean:
 	rm -f fanStatusManagerTest controlPanelTest CommunicatorTest main
 
 upload:
-	rm main && rsync -av ../../../FanChicken pi@10.209.10.221:/home/pi --exclude=".git*" --delete
+	rm -f main && rsync -av ../../../FanChicken $(REMOTEHOST):/home/pi --exclude=".git*" --delete && ssh $(REMOTEHOST) 'cd /home/pi/FanChicken/fanControl/raspberry/ && make'
 
 #syntax
 #
