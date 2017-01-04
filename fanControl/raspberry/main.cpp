@@ -33,6 +33,7 @@ void sleep(int seconds){
 
 int main(int argc, char *argv[]){
     DEBUG_MSG("Program started, debug mode enabled");
+    system("cat /etc/hostname");
     UNUSED(argc);
     UNUSED(argv);
     //todo imlementation. 

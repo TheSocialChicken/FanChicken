@@ -73,22 +73,25 @@ int communicator::activateFans(string devicePath, bool active) {
     return 1;
 }
 
-void communicator::refreshStatus() {
+void communicator::refreshStatus() { //program keeps hanging somewhere in this loop. TODO: PLZFIXME
     DEBUG_MSG("refresing device status...");
     mutexComm.lock();
 
     fanList.clear(); //empty device list
+    DEBUG_MSG("cleared internal List of devices");
     vector<string> devicePaths = getArduinoDevicePaths();
-
+    DEBUG_MSG("Got arduino device paths");
     //convert devicePaths to fanstatus structs
     for (unsigned int i = 0; i < devicePaths.size(); i++) {
         const string elem = devicePaths.at(i);
+	DEBUG_MSG("processing device paths: " << elem);
         fanstatus_t newStatus;
         newStatus.devicepath = elem;
         newStatus.id = i + 1;
         fanList.push_back(newStatus);
     }
-
+    DEBUG_MSG("done processing device paths");
+    //populate the status with information from the arduino itself!
     for (unsigned int i = 0; i < fanList.size(); i++) {
         fanList.at(i) = getStatus(fanList.at(i));
     }
@@ -112,7 +115,7 @@ vector<string> communicator::getArduinoDevicePaths() {
 }
 
 fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
-    mutexComm.lock();
+    //mutexComm.lock();
     fanstatus_t returnStatus = argStatus;
 
     //TODO: test if monented out command below actually works.
@@ -157,6 +160,6 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
         returnStatus.humidity = ::atof(humidity.c_str());
     }
 
-    mutexComm.unlock();
+    //mutexComm.unlock();
     return returnStatus;
 }
