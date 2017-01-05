@@ -36,7 +36,6 @@ int main(int argc, char *argv[]){
     system("cat /etc/hostname");
     UNUSED(argc);
     UNUSED(argv);
-    //todo imlementation. 
     //testMe(); // can be removed in production
 
     communicator commie;
@@ -44,8 +43,7 @@ int main(int argc, char *argv[]){
     controlPanel panel(&commie); //test interupts manually
     while (true) {
 	DEBUG_MSG("Whiletrueloop lololol");
-        //panel.checkButtonStatus();
-        //todo periodicly refresh the status of the system
+        panel.checkButtonStatus();
         sleep(60);
     }
     return 0;

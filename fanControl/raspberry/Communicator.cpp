@@ -19,7 +19,6 @@ std::mutex mutexComm;
 
 communicator::communicator() {
     //default contructor
-    //TODO implementation
 }
 
 int communicator::activateFans(int id, bool active) {
@@ -77,7 +76,7 @@ int communicator::activateFans(string devicePath, bool active) {
     return returncode;
 }
 
-void communicator::refreshStatus() { //program keeps hanging somewhere in this loop. TODO: PLZFIXME
+void communicator::refreshStatus() { 
     DEBUG_MSG("refresing device status...");
     mutexComm.lock();
 

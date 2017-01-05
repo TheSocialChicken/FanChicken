@@ -83,4 +83,3 @@ void controlPanel::button3StatusChange(){
     DEBUG_MSG("button 3: Interupt Lock released");
 }
 
-//TODO, create watch methods for buttons. 
