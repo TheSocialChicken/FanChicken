@@ -48,6 +48,7 @@ fanstatus_t communicator::getStatusFromID(int id) {
 }
 
 int communicator::activateFans(string devicePath, bool active) {
+    int returncode = 1;
     DEBUG_MSG("ActiveFans Method Entered");
     DEBUG_MSG("devicePath = " << devicePath);
     DEBUG_MSG("active = " << active);
@@ -64,16 +65,16 @@ int communicator::activateFans(string devicePath, bool active) {
         flush(Arduino_Output);
         std::cout << "FANS TURNED ON FOR DEVICE " << devicePath << '\n';
         flush(std::cout);
-        return 0;
+        returncode = 0;
     } else {
         Arduino_Output << FANOFF;
         flush(Arduino_Output);
         std::cout << "FANS TURNED OFF FOR DEVICE " << devicePath << '\n';
         flush(std::cout);
-        return 0;
+        returncode = 0;
     }
     mutexComm.unlock();
-    return 1;
+    return returncode;
 }
 
 void communicator::refreshStatus() { //program keeps hanging somewhere in this loop. TODO: PLZFIXME

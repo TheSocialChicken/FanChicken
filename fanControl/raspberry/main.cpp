@@ -44,9 +44,9 @@ int main(int argc, char *argv[]){
     controlPanel panel(&commie); //test interupts manually
     while (true) {
 	DEBUG_MSG("Whiletrueloop lololol");
-        panel.checkButtonStatus();
+        //panel.checkButtonStatus();
         //todo periodicly refresh the status of the system
-        sleep(10);
+        sleep(60);
     }
     return 0;
 }
