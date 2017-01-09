@@ -37,6 +37,11 @@ class controlPanel
 
 		void checkButtonStatus();
 
+
+		/*
+		 * get the status of the fans from the communicator, and display those
+		 */
+		void getAndDisplayStatus();
 	private:
 
 		/*

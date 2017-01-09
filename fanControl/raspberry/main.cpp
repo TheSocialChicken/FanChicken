@@ -44,6 +44,8 @@ int main(int argc, char *argv[]){
     while (true) {
 	DEBUG_MSG("Whiletrueloop lololol");
         panel.checkButtonStatus();
+	commie.refreshStatus();
+	panel.getAndDisplayStatus();
         sleep(60);
     }
     return 0;

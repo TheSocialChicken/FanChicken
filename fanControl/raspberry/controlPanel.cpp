@@ -38,9 +38,14 @@ controlPanel::controlPanel(communicator* commie) {
 
 
 int controlPanel::updateStatus(fanstatus_t status){
-    UNUSED(status);
-    assert(false);
+   std::cout << "FanboxID: " << status.id << '\n'; 
+   std::cout << "Activated: " << status.active << '\n'; 
+   std::cout << "Tempurature: " << status.temperature << '\n';
+   std::cout << "Humidity: " << status.humidity << '\n';
+   std::cout.flush();
+   DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
     //TODO implementation, need to get a display working properly for this to work. 
+   return 0;
 }
 
 void controlPanel::checkButtonStatus() {
@@ -48,6 +53,15 @@ void controlPanel::checkButtonStatus() {
     button1StatusChange();
     button2StatusChange();
     button3StatusChange();
+}
+
+void controlPanel::getAndDisplayStatus() {
+    for (int i = 0; i < 10; i++) {
+        fanstatus_t elem = comm->getStatusFromID(i);
+	if(elem.id != -1){
+	    updateStatus(elem);
+	}
+    }
 }
 
 void controlPanel::button1StatusChange(){
