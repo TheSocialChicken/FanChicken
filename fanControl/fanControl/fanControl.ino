@@ -2,10 +2,8 @@
 
 #define DHTTYPE DHT22 // DHT 22 (AM2302)
 #define relayPin 8
-#define onButton 12
-#define offButton 11
 #define bounceInterval 5
-#define debugPin 17
+#define statusPin 13
 #define errorPin 7
 #define DHTPIN 2 // Pin which is connected to the DHT sensor.
 
@@ -23,8 +21,8 @@ void setup()
   Serial.begin(9600);
   pinMode(relayPin, OUTPUT);
   pinMode(errorPin, OUTPUT);
-  pinMode(debugPin, OUTPUT);
-  pinMode(onButton, INPUT);
+  pinMode(statusPin, OUTPUT);
+
 
   dht.begin();
 }
@@ -34,12 +32,12 @@ void loop()
 {
 
   if (fanActive) {
-    digitalWrite(relayPin, HIGH);
-    digitalWrite(debugPin, LOW);
+    digitalWrite(relayPin, LOW);
+    digitalWrite(statusPin, HIGH);
   } else {
     if (!fanActive) {
-      digitalWrite(debugPin, HIGH);
-      digitalWrite(relayPin, LOW);
+      digitalWrite(relayPin, HIGH);
+      digitalWrite(statusPin, LOW);
     } else {
       digitalWrite(errorPin, HIGH);
       Serial.println("ERROR");
