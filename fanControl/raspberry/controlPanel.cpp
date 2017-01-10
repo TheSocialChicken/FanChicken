@@ -36,7 +36,8 @@ controlPanel::controlPanel(communicator* commie) {
     
 }
 
-
+//TODO display if error
+//FIXME: 'Activated' status incorrectly displayed. Data management is suspect
 int controlPanel::updateStatus(fanstatus_t status){
    std::cout << "FanboxID: " << status.id << '\n'; 
    std::cout << "Activated: " << status.active << '\n'; 
