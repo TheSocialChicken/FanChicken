@@ -12,12 +12,13 @@
 #include "controlPanel.h"
 #include <mutex>
 #include "debug.h"
+#include <lcd.h> 
 
 communicator* comm;
 std::mutex muInterupt; //prevent multiple interrupts from being handled .simultaneously Should not be necessary, but can never be to careful. 
 
 // very handy site for pinouts: https://pinout.xyz/
-
+int fd = -1;
 controlPanel::controlPanel(communicator* commie) {
     DEBUG_MSG("controlPanel starts initialized");
     wiringPiSetupGpio(); //use GPIO numbering scheme
@@ -33,7 +34,29 @@ controlPanel::controlPanel(communicator* commie) {
     wiringPiISR(BUTTON1PIN, INT_EDGE_BOTH, &button1StatusChange);
     wiringPiISR(BUTTON2PIN, INT_EDGE_BOTH, &button2StatusChange);
     wiringPiISR(BUTTON3PIN, INT_EDGE_BOTH, &button3StatusChange);
-    
+
+	//setup display
+
+	fd = lcdInit(
+	    //LCDCONFIG
+	    //rows
+	    4,
+	    //colums
+	    20,
+	    //bits
+	    4,
+
+
+	    //PINLAYOUT
+	    //RS (function select
+	    12, 
+	    //strobe, E (Enable Signal
+	    16, 
+	    //d0 - d7, the data pints
+	    26,17,21,19,0,0,0,0
+	    //0,0,0,0,5,6,13,19
+		    );
+
 }
 
 //TODO display if error
@@ -46,6 +69,10 @@ int controlPanel::updateStatus(fanstatus_t status){
    std::cout.flush();
    DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
     //TODO implementation, need to get a display working properly for this to work. 
+	lcdHome(fd);
+	lcdClear(fd);
+
+	lcdPuts(fd, "CHICKLFANLCDTESTWHOHO");
    return 0;
 }
 

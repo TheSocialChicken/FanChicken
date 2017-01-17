@@ -24,11 +24,12 @@ void displayString(){
 
 	    //PINLAYOUT
 	    //RS (function select
-	    17, 
+	    12, 
 	    //strobe, E (Enable Signal
-	    4, 
+	    16, 
 	    //d0 - d7, the data pints
-	    5,6,13,19,0,0,0,0
+	    26,17,21,19,0,0,0,0
+	    //0,0,0,0,5,6,13,19
 		    );
 	lcdHome(fd);
 	lcdClear(fd);
