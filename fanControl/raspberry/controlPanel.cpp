@@ -12,7 +12,9 @@
 #include "controlPanel.h"
 #include <mutex>
 #include "debug.h"
-#include <lcd.h> 
+#include <lcd.h>
+#include "string"
+#include <cmath>
 
 communicator* comm;
 std::mutex muInterupt; //prevent multiple interrupts from being handled .simultaneously Should not be necessary, but can never be to careful. 
@@ -66,14 +68,9 @@ int controlPanel::updateStatus(fanstatus_t status){
    std::cout << "Activated: " << status.active << '\n'; 
    std::cout << "Tempurature: " << status.temperature << '\n';
    std::cout << "Humidity: " << status.humidity << '\n';
-   std::cout.flush();
-   DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
-    //TODO implementation, need to get a display working properly for this to work. 
-	lcdHome(fd);
-	lcdClear(fd);
+    std::cout.flush();
 
-	lcdPuts(fd, "CHICKLFANLCDTESTWHOHO");
-   return 0;
+    return 0;
 }
 
 void controlPanel::checkButtonStatus() {
@@ -84,10 +81,33 @@ void controlPanel::checkButtonStatus() {
 }
 
 void controlPanel::getAndDisplayStatus() {
+
+    DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
+    int lcdLine = 0;
+
+
+    lcdHome(fd);
+    lcdClear(fd);
+
     for (int i = 0; i < 10; i++) {
         fanstatus_t elem = comm->getStatusFromID(i);
-	if(elem.id != -1){
-	    updateStatus(elem);
+        std::string lcdString = "";
+        if (elem.id != -1) {
+            updateStatus(elem);
+            lcdString.append(std::to_string(lcdLine));
+            lcdString.append("_");
+            lcdString.append(std::to_string(elem.id));
+            lcdString.append("_");
+            lcdString.append(std::to_string(elem.active));
+            lcdString.append("_");
+            lcdString.append(std::to_string(std::round(elem.temperature)));
+            lcdString.append("_");
+            lcdString.append(std::to_string(std::round(elem.humidity)));
+            lcdString.append("_");
+            DEBUG_MSG("LCD: " << lcdString);
+            lcdPuts(fd, lcdString.c_str());
+            lcdPosition(fd, 0, lcdLine++);
+
 	}
     }
 }
