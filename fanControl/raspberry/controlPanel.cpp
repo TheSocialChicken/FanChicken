@@ -94,16 +94,13 @@ void controlPanel::getAndDisplayStatus() {
         std::string lcdString = "";
         if (elem.id != -1) {
             updateStatus(elem);
-            lcdString.append(std::to_string(lcdLine));
-            lcdString.append("_");
             lcdString.append(std::to_string(elem.id));
-            lcdString.append("_");
+            lcdString.append(": ON=");
             lcdString.append(std::to_string(elem.active));
-            lcdString.append("_");
-            lcdString.append(std::to_string(std::round(elem.temperature)));
-            lcdString.append("_");
-            lcdString.append(std::to_string(std::round(elem.humidity)));
-            lcdString.append("_");
+            lcdString.append(" T=");
+            lcdString.append(std::to_string((int) std::round(elem.temperature)));
+            lcdString.append(" H=");
+            lcdString.append(std::to_string((int) std::round(elem.humidity)));
             DEBUG_MSG("LCD: " << lcdString);
             lcdPuts(fd, lcdString.c_str());
             lcdPosition(fd, 0, lcdLine++);

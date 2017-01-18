@@ -46,7 +46,7 @@ int main(int argc, char *argv[]){
         panel.checkButtonStatus();
 	commie.refreshStatus();
 	panel.getAndDisplayStatus();
-        sleep(60);
+        sleep(10);
     }
     return 0;
 }
