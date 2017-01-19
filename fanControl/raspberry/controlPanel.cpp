@@ -85,28 +85,41 @@ void controlPanel::getAndDisplayStatus() {
     DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
     int lcdLine = 0;
 
+    std::string lcdString [4] = {"", "", "", ""};
 
-    lcdHome(fd);
-    lcdClear(fd);
+
 
     for (int i = 0; i < 10; i++) {
         fanstatus_t elem = comm->getStatusFromID(i);
-        std::string lcdString = "";
-        if (elem.id != -1) {
+        if (elem.id != -1 && lcdLine < 4) {
             updateStatus(elem);
-            lcdString.append(std::to_string(elem.id));
-            lcdString.append(": ON=");
-            lcdString.append(std::to_string(elem.active));
-            lcdString.append(" T=");
-            lcdString.append(std::to_string((int) std::round(elem.temperature)));
-            lcdString.append(" H=");
-            lcdString.append(std::to_string((int) std::round(elem.humidity)));
-            DEBUG_MSG("LCD: " << lcdString);
-            lcdPuts(fd, lcdString.c_str());
-            lcdPosition(fd, 0, lcdLine++);
-
-	}
+            lcdString[lcdLine].append(std::to_string(elem.id));
+            lcdString[lcdLine].append(": ON=");
+            lcdString[lcdLine].append(std::to_string(elem.active));
+            lcdString[lcdLine].append(" T=");
+            lcdString[lcdLine].append(std::to_string((int) std::round(elem.temperature)));
+            lcdString[lcdLine].append(" H=");
+            lcdString[lcdLine].append(std::to_string((int) std::round(elem.humidity)));
+            lcdLine++;
+        }
     }
+        DEBUG_MSG("LCD: " << lcdString[0]);
+        DEBUG_MSG("LCD: " << lcdString[1]);
+        DEBUG_MSG("LCD: " << lcdString[2]);
+        DEBUG_MSG("LCD: " << lcdString[3]);
+
+
+        lcdHome(fd);
+        lcdClear(fd);
+        lcdPuts(fd, lcdString[0].c_str());
+
+        lcdPosition(fd, 0, 1);
+        lcdPuts(fd, lcdString[1].c_str());
+        lcdPosition(fd, 0, 2);
+        lcdPuts(fd, lcdString[2].c_str());
+        lcdPosition(fd, 0, 3);
+        lcdPuts(fd, lcdString[3].c_str());
+    
 }
 
 void controlPanel::button1StatusChange(){
