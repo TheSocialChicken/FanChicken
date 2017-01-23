@@ -175,12 +175,32 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
         string humidity = arduinoOutputString.substr(0, arduinoOutputString.find(','));
         arduinoOutputString.erase(0, arduinoOutputString.find(',') + 1);
 
-        active[0] == 1 ? returnStatus.active = true : returnStatus.active = false;
-        error[0] == 1 ? returnStatus.error = true : returnStatus.error = false;
+        active[0] == '1' ? returnStatus.active = true : returnStatus.active = false;
+        error[0] == '1' ? returnStatus.error = true : returnStatus.error = false;
         returnStatus.temperature = ::atof(temperature.c_str());
         returnStatus.humidity = ::atof(humidity.c_str());
     }
-
+    displayInternalData();
     //mutexComm.unlock();
+
     return returnStatus;
+}
+
+void communicator::displayInternalData() {
+
+    for (unsigned int i = 0; i < fanList.size(); i++) {
+        fanstatus_t elem = fanList[i];
+        string StatusString = "";
+        StatusString.append(std::to_string(elem.id));
+        StatusString.append(": ON=");
+        StatusString.append(std::to_string(elem.active));
+        StatusString.append(" T=");
+        StatusString.append(std::to_string(((int) elem.temperature)));
+        StatusString.append(" H=");
+        StatusString.append(std::to_string(((int) elem.humidity)));
+
+        std::cout << StatusString << '\n';
+        std::cout.flush();
+
+    }
 }

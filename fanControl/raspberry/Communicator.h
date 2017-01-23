@@ -48,6 +48,9 @@ public:
      * Get a fanstatus with the specified ID
      */
     fanstatus_t getStatusFromID(int);
+
+
+    void displayInternalData();
 private:
     /*
      * vector that contains all the information about the Fans
