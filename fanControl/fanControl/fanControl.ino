@@ -8,7 +8,7 @@
 #define DHTPIN 2 // Pin which is connected to the DHT sensor.
 
 
-bool fanActive = false;
+bool fanActive = true;
 bool error = false;
 float temperature;
 float humidity;
@@ -22,6 +22,7 @@ void setup()
   pinMode(relayPin, OUTPUT);
   pinMode(errorPin, OUTPUT);
   pinMode(statusPin, OUTPUT);
+  
 
 
   dht.begin();
