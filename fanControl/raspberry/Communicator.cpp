@@ -62,11 +62,13 @@ int communicator::activateFans(string devicePath, bool active) {
     DEBUG_MSG("ActiveFans Method Entered");
     DEBUG_MSG("devicePath = " << devicePath);
     DEBUG_MSG("active = " << active);
-    mutexComm.lock();
+
+
+    mutexComm.lock(); //FIXME, program keeps hanging somewhere here
+    DEBUG_MSG("mutexCommLock engaged!");
     DEBUG_MSG("Accasing device on " << devicePath << ", activate=" << active);
 
-    ifstream Arduino_Input(devicePath); //Opens the tty connection as an ifstream
-    ofstream Arduino_Output(devicePath); //Opens the tty connection as an ofstream, not used in this example
+    ofstream Arduino_Output(devicePath); //Opens the tty connection as an ofstream
     if (active) {
         //activate
         Arduino_Output << FANON;
@@ -81,13 +83,15 @@ int communicator::activateFans(string devicePath, bool active) {
         flush(std::cout);
         returncode = 0;
     }
+    Arduino_Output.close();
     mutexComm.unlock();
+    DEBUG_MSG("mutexCommLock released!");
     return returncode;
 }
 
-void communicator::refreshStatus() { 
+void communicator::refreshStatus() {
     DEBUG_MSG("refresing device status...");
-    mutexComm.lock();
+
 
     fanList.clear(); //empty device list
     DEBUG_MSG("cleared internal List of devices");
@@ -107,7 +111,6 @@ void communicator::refreshStatus() {
     for (unsigned int i = 0; i < fanList.size(); i++) {
         fanList.at(i) = getStatus(fanList.at(i));
     }
-    mutexComm.unlock();
     DEBUG_MSG("refresing device status... DONE!");
 }
 
@@ -127,9 +130,10 @@ vector<string> communicator::getArduinoDevicePaths() {
 }
 
 fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
-    //mutexComm.lock();
+
     fanstatus_t returnStatus = argStatus;
 
+    mutexComm.lock();
     ifstream Arduino_Input(argStatus.devicepath); //Opens the tty connection as an ifstream
     ofstream Arduino_Output(argStatus.devicepath); //Opens the tty connection as an ofstream,
 
@@ -142,7 +146,9 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
         std::getline(Arduino_Input, arduinoOutputString);
     } while (arduinoOutputString.empty());
 
+    mutexComm.unlock();
     Arduino_Input.close();
+    Arduino_Output.close();
     //http://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
 
     if (arduinoOutputString.at(0) == 'U') {
@@ -168,7 +174,7 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
         returnStatus.humidity = ::atof(humidity.c_str());
     }
     displayInternalData();
-    //mutexComm.unlock();
+
 
     return returnStatus;
 }
