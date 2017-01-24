@@ -129,7 +129,7 @@ void controlPanel::button1StatusChange(){
     DEBUG_MSG("button1StatusChange method entered");
     int pinReadout = digitalRead(BUTTON1PIN); 
     DEBUG_MSG("Button 1 status = "); DEBUG_MSG(pinReadout);
-    (pinReadout) ? comm->activateFans(1, true) : comm->activateFans(1, false);
+    (pinReadout) ? comm->activateFans(1, false) : comm->activateFans(1, true);
     contr->getAndDisplayStatus();
 }
 
@@ -137,7 +137,7 @@ void controlPanel::button2StatusChange(){
     DEBUG_MSG("button2StatusChange method entered");
     int pinReadout = digitalRead(BUTTON2PIN); 
     DEBUG_MSG("Button 2 status = "); DEBUG_MSG(pinReadout);
-    (pinReadout) ? comm->activateFans(2, true) : comm->activateFans(2, false);
+    (pinReadout) ? comm->activateFans(2, false) : comm->activateFans(2, true);
     contr->getAndDisplayStatus();
 }
 
@@ -145,7 +145,7 @@ void controlPanel::button3StatusChange(){
     DEBUG_MSG("button3StatusChange method entered");
     int pinReadout = digitalRead(BUTTON3PIN); 
     DEBUG_MSG("Button 3 status = "); DEBUG_MSG(pinReadout);
-    (pinReadout) ? comm->activateFans(3, true) : comm->activateFans(3, false);
+    (pinReadout) ? comm->activateFans(3, false) : comm->activateFans(3, true);
     contr->getAndDisplayStatus();
 }
 
