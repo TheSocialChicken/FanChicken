@@ -41,12 +41,11 @@ int main(int argc, char *argv[]){
     communicator commie;
     commie.refreshStatus();
     controlPanel panel(&commie); //test interupts manually
+    panel.checkButtonStatus();
     while (true) {
 	DEBUG_MSG("Whiletrueloop lololol");
-        panel.checkButtonStatus();
-	commie.refreshStatus();
-	panel.getAndDisplayStatus();
-        sleep(1);
+        panel.getAndDisplayStatus();
+        sleep(60);
     }
     return 0;
 }

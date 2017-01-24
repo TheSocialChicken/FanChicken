@@ -142,7 +142,6 @@ fanstatus_t communicator::getStatus(fanstatus_t argStatus) {
     flush(Arduino_Output);
 
     do {
-        system("sleep 1"); //dirty, need to fix sometime later
         std::getline(Arduino_Input, arduinoOutputString);
     } while (arduinoOutputString.empty());
 

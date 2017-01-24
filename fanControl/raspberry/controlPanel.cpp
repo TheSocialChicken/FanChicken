@@ -15,7 +15,7 @@
 #include <lcd.h>
 #include "string"
 #include <cmath>
-
+controlPanel* contr;
 communicator* comm;
 std::mutex muLCD;
 
@@ -30,7 +30,7 @@ controlPanel::controlPanel(communicator* commie) {
     pullUpDnControl(BUTTON2PIN, PUD_DOWN);
     pinMode(BUTTON3PIN,INPUT);
     pullUpDnControl(BUTTON3PIN, PUD_DOWN);
-
+    contr = this;
     comm = commie;
 
     wiringPiISR(BUTTON1PIN, INT_EDGE_BOTH, &button1StatusChange);
@@ -83,6 +83,7 @@ void controlPanel::checkButtonStatus() {
 
 void controlPanel::getAndDisplayStatus() {
 
+    comm->refreshStatus();
     DEBUG_MSG("WARNING: DISPLAYDRIVER NEEDS IMPLEMENTATION!");
     int lcdLine = 0;
 
@@ -129,6 +130,7 @@ void controlPanel::button1StatusChange(){
     int pinReadout = digitalRead(BUTTON1PIN); 
     DEBUG_MSG("Button 1 status = "); DEBUG_MSG(pinReadout);
     (pinReadout) ? comm->activateFans(1, true) : comm->activateFans(1, false);
+    contr->getAndDisplayStatus();
 }
 
 void controlPanel::button2StatusChange(){
@@ -136,6 +138,7 @@ void controlPanel::button2StatusChange(){
     int pinReadout = digitalRead(BUTTON2PIN); 
     DEBUG_MSG("Button 2 status = "); DEBUG_MSG(pinReadout);
     (pinReadout) ? comm->activateFans(2, true) : comm->activateFans(2, false);
+    contr->getAndDisplayStatus();
 }
 
 void controlPanel::button3StatusChange(){
@@ -143,5 +146,6 @@ void controlPanel::button3StatusChange(){
     int pinReadout = digitalRead(BUTTON3PIN); 
     DEBUG_MSG("Button 3 status = "); DEBUG_MSG(pinReadout);
     (pinReadout) ? comm->activateFans(3, true) : comm->activateFans(3, false);
+    contr->getAndDisplayStatus();
 }
 
